@@ -1,5 +1,7 @@
 import { useState } from "react";
 import PostList from "./components/PostList";
+import MyButton from "./components/UI/button/MyButton";
+import MyInput from "./components/UI/input/MyInput";
 import './styles/App.css'
 
 function App() {
@@ -8,17 +10,15 @@ function App() {
     {id: 2, title: 'JS', body: 'Description'},
     {id: 3, title: 'HTML', body: 'Description'},
   ])
-  const [posts2, setPosts2] = useState([
-    {id: 1, title: 'React2', body: 'Description'},
-    {id: 2, title: 'JS2', body: 'Description'},
-    {id: 3, title: 'HTML2', body: 'Description'},
-  ])
 
   return (
     <div className="App">
+      <form>
+        <MyInput type='text' placeholder="Название поста"></MyInput>
+        <MyInput type='text' placeholder="Описание поста"></MyInput>
+        <MyButton disabled>Создать новый пост</MyButton>
+      </form>
       <PostList posts={posts} title='Список постов 1'/>
-      <PostList posts={posts2} title='Список постов 2'/>
-
     </div>
   );
 }
