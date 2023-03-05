@@ -1,27 +1,24 @@
 import { useState } from "react";
+import PostList from "./components/PostList";
+import './styles/App.css'
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [value, setValue] = useState('Текст в инпуте');
-
-  function increment() {
-    setCount(count + 1)
-  }
-
-  function decrement() {
-    setCount(count - 1)
-  }
+  const [posts, setPosts] = useState([
+    {id: 1, title: 'React', body: 'Description'},
+    {id: 2, title: 'JS', body: 'Description'},
+    {id: 3, title: 'HTML', body: 'Description'},
+  ])
+  const [posts2, setPosts2] = useState([
+    {id: 1, title: 'React2', body: 'Description'},
+    {id: 2, title: 'JS2', body: 'Description'},
+    {id: 3, title: 'HTML2', body: 'Description'},
+  ])
 
   return (
     <div className="App">
-      <h1>{count}</h1>
-      <h2>{value}</h2>
-      <input
-      type='text' 
-      value={value}
-      onChange={event => setValue(event.target.value)}></input>
-      <button onClick={increment}>Increment</button>
-      <button onClick={decrement}>Decrement</button>
+      <PostList posts={posts} title='Список постов 1'/>
+      <PostList posts={posts2} title='Список постов 2'/>
+
     </div>
   );
 }
