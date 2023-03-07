@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useMemo, useState } from "react";
 import PostFilter from "./components/PostFilter";
 import PostForm from "./components/PostForm";
@@ -8,11 +9,7 @@ import { usePosts } from "./hooks/usePosts";
 import './styles/App.css'
 
 function App() {
-  const [posts, setPosts] = useState([
-    {id: 1, title: 'React', body: 'Это библиотека JavaScript с открытым кодом для создания внешних пользовательских интерфейсов.'},
-    {id: 2, title: 'JS', body: 'Мультипарадигменный язык программирования. Поддерживает объектно-ориентированный, императивный и функциональный стили.'},
-    {id: 3, title: 'HTML', body: 'Стандартизированный язык гипертекстовой разметки документов для просмотра веб-страниц в браузере.'},
-  ])
+  const [posts, setPosts] = useState([]);
 
   const [filter, setFilter] = useState({sort: '', query: ''});
 
@@ -21,7 +18,10 @@ function App() {
 
 
 
-
+  async function fetchPosts() {
+    const response = await axios.get('https://jsonplaceholder.typicode.com/posts')
+    setPosts(response.data)
+  }
 
 
 
@@ -36,6 +36,7 @@ function App() {
 
   return (
     <div className="App">
+      <MyButton onClick={fetchPosts}>GET</MyButton>
       <MyButton style={{marginTop: 30}} onClick={() => setModal(true)}>
         Создать
       </MyButton>
