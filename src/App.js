@@ -2,6 +2,8 @@ import { useMemo, useState } from "react";
 import PostFilter from "./components/PostFilter";
 import PostForm from "./components/PostForm";
 import PostList from "./components/PostList";
+import MyButton from "./components/UI/button/MyButton";
+import MyModal from "./components/UI/modal/MyModal";
 import './styles/App.css'
 
 function App() {
@@ -11,7 +13,9 @@ function App() {
     {id: 3, title: 'HTML', body: 'Стандартизированный язык гипертекстовой разметки документов для просмотра веб-страниц в браузере.'},
   ])
 
-  const [filter, setFilter] = useState({sort: '', query: ''})
+  const [filter, setFilter] = useState({sort: '', query: ''});
+
+  const [modal, setModal] = useState(false);
 
 
 
@@ -29,6 +33,7 @@ function App() {
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
+    setModal(false)
   }
 
   const removePost = (post) => {
@@ -37,7 +42,13 @@ function App() {
 
   return (
     <div className="App">
-      <PostForm create={createPost}/>
+      <MyButton style={{marginTop: 30}} onClick={() => setModal(true)}>
+        Создать
+      </MyButton>
+      <MyModal visible={modal} setVisible={setModal}>
+        <PostForm create={createPost}/>
+      </MyModal>
+      
       <hr style={{margin: '15px 0'}}/>
       <PostFilter 
         filter={filter}
